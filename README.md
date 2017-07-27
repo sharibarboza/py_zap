@@ -116,5 +116,5 @@ To fetch the [cable ratings for October 27, 2016:](http://tvbythenumbers.zap2it.
 ## License
 
 * This project is under the MIT License.
-* All content is owned by Tribune Media Company. See zap2it.com's [Terms of Service](http://zap2it.com/terms-of-service/) for more details.
+* All content is owned by Tribune Media Company. See zap2it.com's [Terms of Service](http://screenertv.com/terms-of-service/) for more details.
 

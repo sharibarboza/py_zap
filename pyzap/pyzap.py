@@ -1,12 +1,39 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+'''
+Python scraper for fetching Broadcast and Cable TV ratings from 
+tvbythenumbers.zap2it.com
+
+MIT License
+
+Copyright (c) 2017 Sharidan Barboza
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+'''
 
 import re
 
 from .utils import *
 from .constants import YESTERDAY, URL_FORMAT, BASE_URL, SEARCH_URL, PAGE_ERROR
 from .search import SearchDaily
+from .sorter import Sorter
 
 
 class Entry(object):
@@ -87,6 +114,11 @@ class Ratings(object):
             self.entries = self.fetch_entries()
         else:
             raise PageNotFoundError(PAGE_ERROR)
+
+    def sort(self, attr):
+        """Sort the ratings based on an attribute"""
+        self.entries = Sorter(self.entries, self.category, attr).sort_entries()
+        return self
 
     def get_all(self, attr):
         """Returns a list of the requested attribute from all entries"""

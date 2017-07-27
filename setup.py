@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='zappy',
-    version='1.0.0',
+    version='1.0',
     description='Python scraper for accessing ratings from tvbythenumbers.zap2it.com',
     author='sharibarboza',
     author_email='barbozashari@gmail.com',

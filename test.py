@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 
 from bs4 import BeautifulSoup
+import json
 
 from pyzap.constants import BASE_URL, DATE_FMT
 import pyzap.utils as u
@@ -29,6 +30,10 @@ class TestCableRatings(unittest.TestCase):
             self.assertTrue(len(entry.show) > 0)
             self.assertTrue(len(entry.net) > 0)
             self.assertTrue(len(entry.time) > 0)
+
+    def test_valid_json(self):
+        """Test Cable ratings produces valid JSON"""
+        self.assertTrue(json.loads(self.ratings.get_json()))
 
 
 class TestBroadcastRatings(unittest.TestCase):
@@ -61,6 +66,10 @@ class TestBroadcastRatings(unittest.TestCase):
 
         for network in networks:
             self.assertTrue(network in averages)
+
+    def test_valid_json(self):
+        """Test Broadcast ratings produces valid JSON"""
+        self.assertTrue(json.loads(self.ratings.get_json()))
 
 
 class TestInvalidDate(unittest.TestCase):
@@ -244,7 +253,6 @@ class TestSearchDaily(unittest.TestCase):
         date = 'July 25 ' + str(year)
         search = SearchDaily(category, date)
         self.assertRaises(u.PageNotFoundError, search.fetch_result)
-
 
 
 if __name__ == '__main__':

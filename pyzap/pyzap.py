@@ -108,6 +108,8 @@ class Ratings(object):
         self.date_obj = convert_date(self.date)
         self.weekday = get_day(self.date_obj)
         self.soup = self._get_ratings_page()
+        self.next_week = next_week(self.date_obj)
+        self.last_week = last_week(self.date_obj)
 
         # After finding the page, grab the results
         if self._verify_page():
@@ -134,11 +136,11 @@ class Ratings(object):
 
     def get_next_week(self):
         """Get the date object for next week"""
-        return next_week(self.date_obj)
+        return self.next_week
 
     def get_last_week(self):
         """Get the date object for last week"""
-        return last_week(self.date_obj)
+        return self.last_week
 
     def get_title(self):
         """Title is either the chart header for a cable ratings page or above
@@ -167,7 +169,7 @@ class Ratings(object):
             'entries': self.entries,
             'url': self.url
         }
-        return utils.to_json(ratings_dict)
+        return to_json(ratings_dict)
 
     def get_rows(self):
         raise NotImplementedError('Must be overwritten by subclass.')

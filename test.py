@@ -4,10 +4,10 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import json
 
-from zappy.constants import BASE_URL, DATE_FMT
-import zappy.utils as u
-from zappy.search import SearchDaily
-from zappy import Cable, Broadcast
+from py_zap.constants import BASE_URL, DATE_FMT
+import py_zap.utils as u
+from py_zap.search import SearchDaily
+from py_zap import Cable, Broadcast
 
 
 

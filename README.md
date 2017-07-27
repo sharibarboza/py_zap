@@ -1,12 +1,12 @@
-# zappy
+# py_zap
 
-zappy is a Python scraper for fetching daily broadcast and cable ratings from tvbythenumbers.zap2it.com.
+py_zap is a Python scraper for fetching daily broadcast and cable ratings from tvbythenumbers.zap2it.com.
 
 ## Installation
 
 To install with pip:
 ```
-pip install zappy
+pip install py_zap
 ```
 Or clone this repository and run ```python setup.py install```.
 
@@ -14,7 +14,7 @@ Or clone this repository and run ```python setup.py install```.
 Let's fetch the [final broadcast ratings for October 27, 2016.](http://tvbythenumbers.zap2it.com/daily-ratings/thursday-final-ratings-oct-27-2016/)
 * **If no date parameter is included, it will default to yesterday's date**
 ```python
->>> from zappy import Broadcast
+>>> from py_zap import Broadcast
 >>> ratings = Broadcast('October 27, 2016')
 ```
 
@@ -64,7 +64,7 @@ By default, the final broadcast ratings are fetched. To access the fast ratings,
 ## Cable Ratings
 To fetch the [cable ratings for October 27, 2016:](http://tvbythenumbers.zap2it.com/daily-ratings/thursday-cable-ratings-october-27-2016/)
 ```python
->>> from zappy import Cable
+>>> from py_zap import Cable
 >>> ratings = Cable('October 27, 2016')
 ```
 

@@ -63,6 +63,26 @@ class TestBroadcastRatings(unittest.TestCase):
             self.assertTrue(network in averages)
 
 
+class TestInvalidDate(unittest.TestCase):
+
+    def test_page_not_found_error(self):
+        """Test assertion of page not found error with invalid date"""
+        date = 'July 25 ' + str(datetime.today().year + 1)
+        self.assertRaises(u.PageNotFoundError, Broadcast, date)
+
+
+class TestRatingsLimit(unittest.TestCase):
+
+    def setUp(self):
+        self.date = 'July 25 2017'
+        self.limit = 6
+        self.ratings = Broadcast(self.date, limit=self.limit)
+
+    def test_has_6_ratings(self):
+        """Test that the ratings is only limited to 6 results"""
+        self.assertEqual(len(self.ratings), self.limit)
+
+
 class TestUtils(unittest.TestCase):
 
     def test_convert_string(self):

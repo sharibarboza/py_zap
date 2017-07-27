@@ -166,4 +166,4 @@ def get_strings(soup, tag):
 
 def exceeded_limit(limit, length):
     """Check if the length exceeds a limit"""
-    return True if limit and length > limit else False
+    return True if limit and length >= limit else False

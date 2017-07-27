@@ -1,5 +1,5 @@
 #!/usr/bin/env python
 
-from .pyzap import Cable, Broadcast
+from .zappy import Cable, Broadcast
 
 __all__ = ['Cable', 'Broadcast']

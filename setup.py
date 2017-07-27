@@ -9,6 +9,7 @@ setup(
     author='sharibarboza',
     author_email='barbozashari@gmail.com',
     url='https://github.com/sharibarboza/pyzap',
+    download_url='https://github.com/sharibarboza/pyzap/archive/0.1.tar.gz',
     license='MIT License',
     packages=['pyzap'],
     install_requires=[

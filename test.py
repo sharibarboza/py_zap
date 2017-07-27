@@ -24,11 +24,11 @@ class TestCableRatings(unittest.TestCase):
     def test_valid_entries(self):
         """Test Cable rating entries have valid fields"""
         for entry in self.ratings:
-            self.assertTrue(len(entry['show']) > 0)
-            self.assertTrue(len(entry['net']) > 0)
-            self.assertTrue(len(entry['time']) > 0)
-            self.assertTrue(entry['viewers'] > 0)
-            self.assertTrue(entry['rating'] > 0)
+            self.assertTrue(entry.viewers > 0)
+            self.assertTrue(entry.rating > 0)
+            self.assertTrue(len(entry.show) > 0)
+            self.assertTrue(len(entry.net) > 0)
+            self.assertTrue(len(entry.time) > 0)
 
 
 class TestBroadcastRatings(unittest.TestCase):
@@ -45,12 +45,12 @@ class TestBroadcastRatings(unittest.TestCase):
     def test_valid_entries(self):
         """Test Broadcast rating entries have valid fields"""
         for entry in self.ratings:
-            self.assertTrue(len(entry['show']) > 0)
-            self.assertTrue(len(entry['net']) > 0)
-            self.assertTrue(len(entry['time']) > 0)
-            self.assertTrue(entry['viewers'] > 0)
-            self.assertTrue(entry['rating'] > 0)
-            self.assertTrue(entry['share'] > 0)
+            self.assertTrue(entry.viewers > 0)
+            self.assertTrue(entry.rating > 0)
+            self.assertTrue(entry.share > 0)
+            self.assertTrue(len(entry.show) > 0)
+            self.assertTrue(len(entry.net) > 0)
+            self.assertTrue(len(entry.time) > 0)
 
     def test_get_averages(self):
         """Test getting network averages for Broadcast ratings"""
@@ -82,6 +82,55 @@ class TestRatingsLimit(unittest.TestCase):
         """Test that the ratings is only limited to 6 results"""
         self.assertEqual(len(self.ratings), self.limit)
 
+
+class TestBroadcastShowFilter(unittest.TestCase):
+
+    def setUp(self):
+        self.date = 'October 27 2016'
+        shows = ['Big Bang Theory', 'Supernatural']
+        self.ratings = Broadcast(self.date, show=shows)
+
+    def test_broadcast_show_filter(self):
+        """Test that Broadcast shows are filtered in results"""
+        self.assertEqual(len(self.ratings), 2)
+
+
+class TestCableShowFilter(unittest.TestCase):
+
+    def setUp(self):
+        self.date = 'May 15 2016'
+        shows = ['Game of Thrones', 'Silicon Valley', 'Kardashians']
+        self.ratings = Cable(self.date, show=shows)
+
+    def test_cable_show_filter(self):
+        """Test that Cable shows are filtered in results"""
+        self.assertEqual(len(self.ratings), 3)
+
+
+class TestBroadcastNetFilter(unittest.TestCase):
+
+    def setUp(self):
+        self.date = 'October 27 2016'
+        self.networks = ['CBS', 'ABC']
+        self.ratings = Broadcast(self.date, network=self.networks)
+
+    def test_broadcast_network_filter(self):
+        """Test that Broadcast networks are filtered in results"""
+        for entry in self.ratings:
+            self.assertTrue(u.match_words(self.networks, entry.net))
+
+
+class TestCableNetFilter(unittest.TestCase):
+
+    def setUp(self):
+        self.date = 'July 23 2017'
+        self.networks = ['HBO', 'Starz']
+        self.ratings = Cable(self.date, network=self.networks)
+
+    def test_cable_network_filter(self):
+        """Test that Cable networks are filtered in results"""
+        for entry in self.ratings:
+            self.assertTrue(u.match_words(self.networks, entry.net))
 
 class TestUtils(unittest.TestCase):
 

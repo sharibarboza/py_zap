@@ -309,7 +309,7 @@ class Cable(Ratings):
             if not self._match_query(show, net):
                 continue
 
-            entry_dict['show'] = show
+            entry_dict['show'] = show.title()
             entry_dict['net'] = net
             entry_dict['time'] = entry[2].string
 
@@ -346,11 +346,13 @@ class Broadcast(Ratings):
             'network': network,
             'limit': limit
         }
-
+        Ratings.__init__(self, **broadcast_dict)
+        '''
         try:
             Ratings.__init__(self, **broadcast_dict)
         except Exception:
             raise PageNotFoundError(PAGE_ERROR) from None
+        '''
 
     def __repr__(self):
         if self.category == 'final':

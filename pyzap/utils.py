@@ -16,6 +16,11 @@ if sys.version_info[0] == 3:
 else:
     PY3 = False
 
+if PY3:
+    sys.tracebacklimit = None
+else:
+    sys.tracebacklimit = 0
+
 
 class PageNotFoundError(Exception):
     """Raise exception when page is not found."""

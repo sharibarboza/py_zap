@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 DATE_FMT = '%B %-d %Y'
 YESTERDAY = (datetime.today() - timedelta(days=1)).strftime(DATE_FMT)
 
-HEADERS = {'User-Agent': 'zap2it.py (https://github.com/sharibarboza/zap2it'}
+HEADERS = {'User-Agent': 'zap2it.py (https://github.com/sharibarboza/zap2it)'}
 
 BASE_URL = 'http://tvbythenumbers.zap2it.com'
 URL_FORMAT = '{0}/daily-ratings/{1}-{2}-{3}/'

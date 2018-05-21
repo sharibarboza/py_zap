@@ -1,25 +1,32 @@
-# py_zap
+py_zap
+======
 
 py_zap is a Python scraper for fetching daily broadcast and cable ratings from tvbythenumbers.zap2it.com.
 
-## Installation
+Installation
+------------
 
 To install with pip:
-```
-pip install py_zap
-```
-Or clone this repository and run ```python setup.py install```.
 
-## Broadcast Ratings
-Let's fetch the [final broadcast ratings for October 27, 2016.](http://tvbythenumbers.zap2it.com/daily-ratings/thursday-final-ratings-oct-27-2016/)
+>>> pip install py_zap
+
+Or clone this repository and run:
+
+>>> python setup.py install
+
+**Broadcast Ratings**
+
+Let's fetch the `final broadcast ratings for October 27, 2016.`_
+
+.. _final broadcast ratings for October 27, 2016.: http://tvbythenumbers.zap2it.com/daily-ratings/thursday-final-ratings-oct-27-2016/
+
 * **If no date parameter is included, it will default to yesterday's date**
-```python
+
 >>> from py_zap import Broadcast
 >>> ratings = Broadcast('October 27, 2016')
-```
 
 * Now we can look at the chart entries:
-```python
+
 >>> entry = ratings[0]     # Gives the 1st entry
 >>> entry.show             # Get the name of the show
 'The Big Bang Theory'
@@ -27,14 +34,13 @@ Let's fetch the [final broadcast ratings for October 27, 2016.](http://tvbythenu
 14.3
 >>> entry.rating           # Get the rating (percentage)
 3.4
-```
 
-* We can also ```print``` out the whole chart by:
-```python
-print(ratings)
-```
+* We can also ``print`` out the whole chart by:
 
-```
+>>> print(ratings)
+
+
+>>>
 Final Broadcast Ratings for Thursday, October 27 2016
 |Show                          |Time      |Network|Viewers|Rating |Share  |
 +-------------------------------------------------------------------------+
@@ -54,67 +60,67 @@ Final Broadcast Ratings for Thursday, October 27 2016
 |Pure Genius                   |   10 p.m.|    CBS|    6.2|    1.0|    4.0|
 |The Blacklist                 |   10 p.m.|    NBC|    5.5|    1.2|    4.0|
 |How to Get Away with Murder   |   10 p.m.|    ABC|    4.1|    1.2|    4.0|
-```
 
 By default, the final broadcast ratings are fetched. To access the fast ratings, which are posted earlier but less accurate, set 'final' param to False. If there are no final ratings available, it will redirect to fast access ratings.
-```python
->>> ratings = Broadcast('October 27, 2016', final=False)
-```
 
-## Cable Ratings
-To fetch the [cable ratings for October 27, 2016:](http://tvbythenumbers.zap2it.com/daily-ratings/thursday-cable-ratings-october-27-2016/)
-```python
+>>> ratings = Broadcast('October 27, 2016', final=False)
+
+**Cable Ratings**
+
+To fetch the `cable ratings for October 27, 2016:`_
+
+.. _cable ratings for October 27, 2016\:: http://tvbythenumbers.zap2it.com/daily-ratings/thursday-cable-ratings-october-27-2016/
+
 >>> from py_zap import Cable
 >>> ratings = Cable('October 27, 2016')
-```
 
-## Other things you can do
+Other things you can do
+-----------------------
 
-### Sort chart results
-* Broadcast or cable ratings can be sorted based on _show_, _net_, _time_, _rating_, or _viewers_
-* Broadcast ratings only can be sorted on _share_
-```python
-# Sort cable ratings by viewers
->>> ratings = Cable('October 27, 2016').sort('viewers')
+**Sort chart results**
 
-# Sort broadcast ratings by share (broadcast only)
->>> ratings = Broadcast('October 27, 2016').sort('share')
-```
+* Broadcast or cable ratings can be sorted based on *show*, *net*, *time*, *rating*, or *viewers*
+* Broadcast ratings only can be sorted on *share*
 
-### Fetch specific shows or networks
+>>> ratings = Cable('October 27, 2016').sort('viewers')    # Sort cable ratings by viewers
+
+>>> ratings = Broadcast('October 27, 2016').sort('share')  # Sort broadcast ratings by share (broadcast only)
+
+**Fetch specific shows or networks**
+
 * Pass a list if you want to fetch more than one
-```python
-# Fetch a specific show
->>> ratings = Broadcast('October 27, 2016', show='Supernatural')
 
-# Fetch a specific network
->>> ratings = Broadcast('October 27, 2016', network=['CBS', 'NBC'])
-```
+>>> ratings = Broadcast('October 27, 2016', show='Supernatural')     # Fetch a specific show
 
-### Iterate through multiple weeks
-```python
-# Get next week's date
->>> next_week = ratings.get_next_week()
+>>> ratings = Broadcast('October 27, 2016', network=['CBS', 'NBC'])  # Fetch a specific network
 
-# Get last week's date
->>> last_week = ratings.get_last_week()
-```
+**Iterate through multiple weeks**
+>>> next_week = ratings.get_next_week()  # Get next week's date
 
-### Get network averages (broadcast only)
-```python
-# Get the ratings/viewers averages for broadcast networks
->>> averages = ratings.get_averages()
+>>> last_week = ratings.get_last_week()  # Get last week's date
+
+**Get network averages (broadcast only)**
+
+>>> averages = ratings.get_averages()  # Get the ratings/viewers averages for broadcast networks
 >>> averages['NBC']
 {'rating': 1.3, 'viewers': 5.56, 'share': 5.0}
-```
 
-## Dependencies
+Dependencies
+------------
 
-* [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/)
-* [requests](http://requests.readthedocs.io/en/latest/)
+* `Beautiful Soup 4`_
 
-## License
+.. _Beautiful Soup 4: https://www.crummy.com/software/BeautifulSoup/
+
+* `requests`_
+
+.. _requests: http://requests.readthedocs.io/en/latest/
+
+License
+-------
 
 * This project is under the MIT License.
-* All content is owned by Tribune Media Company. See zap2it.com's [Terms of Service](http://screenertv.com/terms-of-service/) for more details.
+* All content is owned by Tribune Media Company. See zap2it.com's `Terms of Service`_ for more details.
+
+.. _Terms of Service: http://screenertv.com/terms-of-service/
 

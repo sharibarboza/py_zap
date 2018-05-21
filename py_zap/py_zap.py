@@ -208,14 +208,14 @@ class Ratings(object):
     def _match_show(self, show):
         """Match a query for a specific show/list of shows"""
         if self.show:
-            return match_words(self.show, show)
+            return match_list(self.show, show)
         else:
             return True
 
     def _match_net(self, net):
         """Match a query for a specific network/list of networks"""
         if self.network:
-            return match_words(self.network, net)
+            return match_list(self.network, net)
         else:
             return True
 

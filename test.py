@@ -126,7 +126,7 @@ class TestBroadcastNetFilter(unittest.TestCase):
     def test_broadcast_network_filter(self):
         """Test that Broadcast networks are filtered in results"""
         for entry in self.ratings:
-            self.assertTrue(u.match_words(self.networks, entry.net))
+            self.assertTrue(u.match_list(self.networks, entry.net))
 
 
 class TestCableNetFilter(unittest.TestCase):
@@ -139,7 +139,7 @@ class TestCableNetFilter(unittest.TestCase):
     def test_cable_network_filter(self):
         """Test that Cable networks are filtered in results"""
         for entry in self.ratings:
-            self.assertTrue(u.match_words(self.networks, entry.net))
+            self.assertTrue(u.match_list(self.networks, entry.net))
 
 class TestUtils(unittest.TestCase):
 
@@ -212,13 +212,13 @@ class TestUtils(unittest.TestCase):
         """Test if a phrase successfully matches a word list"""
         phrase = 'It\'s Always Sunny in Philadelphia'
         query = 'always sunny philadelphia'
-        self.assertTrue(u.match_words(query.split(), phrase))
+        self.assertTrue(u.match_list(query, phrase))
 
     def test_match_words_fail(self):
         """Test if a phrase unsuccessfully matches a word list"""
         phrase = 'Survivor'
         query = 'designated survivor'
-        self.assertFalse(u.match_words(query.split(), phrase))
+        self.assertFalse(u.match_list(query, phrase))
 
 
 class TestSearchDaily(unittest.TestCase):

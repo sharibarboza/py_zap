@@ -231,8 +231,9 @@ class Ratings(object):
         title = unescape_html(''.join(self.get_title()))
 
         # Extract string from header by getting last 3 words
-        date_string = ' '.join(self.get_title().split()[-3:])
-        return convert_string(date_string)
+        #date_string = ' '.join(self.get_title().split()[-3:])
+        #return convert_string(date_string)
+        return convert_string(title)
 
     def _get_ratings_page(self):
         """Do a limited search for the correct url."""
@@ -311,7 +312,7 @@ class Cable(Ratings):
             if not self._match_query(show, net):
                 continue
 
-            entry_dict['show'] = show.title()
+            entry_dict['show'] = show
             entry_dict['net'] = net
             entry_dict['time'] = entry[2].string
 
@@ -462,4 +463,5 @@ class Broadcast(Ratings):
             r_info += string
         rating, share = r_info.split('/')
         return (rating, share.strip('*'))
+
 

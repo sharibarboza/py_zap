@@ -31,9 +31,12 @@ def to_json(data):
     """Return data as a JSON string."""
     return json.dumps(data, default=lambda x: x.__dict__, sort_keys=True, indent=4)
 
-def convert_string(string):
+def convert_string(string, chars=None):
     """Remove certain characters from a string."""
-    for ch in [',', '.', '-', '/', ':', '  ']:
+    if chars is None:
+        chars = [',', '.', '-', '/', ':', '  ']
+
+    for ch in chars:
         if ch in string:
             string = string.replace(ch, ' ')
     return string
@@ -134,12 +137,15 @@ def match_words(query_list, string):
     # Get rid of 'the' word to ease string matching
     match = False
     index = 0
+    string = ' '.join(filter_stopwords(string))
 
-    while not match and index < len(query_list):
+    while index < len(query_list):
         query = query_list[index]
         words_query = filter_stopwords(query)
-        string = ' '.join(filter_stopwords(string))
         match = all(word in string for word in words_query)
+        if not match:
+            break
+
         index += 1
 
     return match

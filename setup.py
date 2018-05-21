@@ -2,10 +2,15 @@
 
 from setuptools import setup
 
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
 setup(
     name='py_zap',
-    version='1.0.0',
+    version='1.1.0',
     description='Python scraper for accessing ratings from tvbythenumbers.zap2it.com',
+    long_description=readme(),
     author='sharibarboza',
     author_email='barbozashari@gmail.com',
     url='https://github.com/sharibarboza/py_zap',

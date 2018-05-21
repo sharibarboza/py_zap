@@ -95,6 +95,7 @@ Other things you can do
 >>> ratings = Broadcast('October 27, 2016', network=['CBS', 'NBC'])  # Fetch a specific network
 
 **Iterate through multiple weeks**
+
 >>> next_week = ratings.get_next_week()  # Get next week's date
 
 >>> last_week = ratings.get_last_week()  # Get last week's date

@@ -19,3 +19,9 @@ Release History
 **Miscellaneous**
 
 - Convert markdown files to reStructuredText
+
+**1.2.1 (2018-05-21)**
+
+**Miscellaneous**
+
+- Fix typos/spacing in README

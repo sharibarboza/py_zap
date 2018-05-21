@@ -13,4 +13,9 @@ Release History
 **Miscellaneous**
 
 - Added a long description
+
+**1.2.0 (2018-05-21)**
+
+**Miscellaneous**
+
 - Convert markdown files to reStructuredText

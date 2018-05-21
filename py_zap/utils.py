@@ -132,23 +132,30 @@ def get_soup(url):
     else:
         return None
 
-def match_words(query_list, string):
-    """Return True if all words in a word list are in the string."""
+def match_list(query_list, string):
+    """Return True if all words in a word list are in the string.
+
+    :param query_list: list of words to match
+    :param string: the word or words to be matched against
+    """
     # Get rid of 'the' word to ease string matching
     match = False
     index = 0
     string = ' '.join(filter_stopwords(string))
 
+    if not isinstance(query_list, list):
+        query_list = [query_list]
+
     while index < len(query_list):
         query = query_list[index]
         words_query = filter_stopwords(query)
         match = all(word in string for word in words_query)
-        if not match:
+        if match:
             break
 
         index += 1
 
-    return match
+    return match    
 
 def filter_stopwords(phrase):
     """Filter out stop words and return as a list of words"""

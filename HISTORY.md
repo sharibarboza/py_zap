@@ -9,4 +9,3 @@
 
 **Miscellaneous**
 * Added a long description
-* Changed ```README.md``` to ```README.rst```

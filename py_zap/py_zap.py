@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-Python scraper for fetching Broadcast and Cable TV ratings from 
+Python scraper for fetching Broadcast and Cable TV ratings from
 tvbythenumbers.zap2it.com
 
 MIT License
@@ -54,11 +54,11 @@ class Entry(object):
             kwargs[key] = convert_float(safe_unicode(value))
         self.__dict__.update(kwargs)
 
-    def __repr__(self):        
+    def __repr__(self):
         """Format row for entry object in a ratings chart"""
         s = None
 
-        try: 
+        try:
             # Set width for network column (cable has longer width)
             width = 7 if hasattr(self, 'share') else 16
 
@@ -102,9 +102,10 @@ class Ratings(object):
         for attr in ["show", "network"]:
             key = kwargs.get(attr)
             if key is not None and not isinstance(key, list):
-                kwargs[attr] = [key]                            
+                kwargs[attr] = [key]
         self.__dict__.update(kwargs)
 
+        self.date = convert_string(self.date)
         self.date_obj = convert_date(self.date)
         self.weekday = get_day(self.date_obj)
         self.soup = self._get_ratings_page()
@@ -150,6 +151,9 @@ class Ratings(object):
             strings = get_strings(self.soup, 'strong')
         else:
             strings = get_strings(self.soup, 'b')
+
+        if len(strings) == 0:
+            strings = get_strings(self.soup, 'strong')
 
         if len(strings) >= 1 and self.category == 'cable':
             return strings[0]
@@ -229,10 +233,6 @@ class Ratings(object):
     def _get_date_in_title(self):
         """Extract the date string from the title."""
         title = unescape_html(''.join(self.get_title()))
-
-        # Extract string from header by getting last 3 words
-        #date_string = ' '.join(self.get_title().split()[-3:])
-        #return convert_string(date_string)
         return convert_string(title)
 
     def _get_ratings_page(self):
@@ -242,7 +242,7 @@ class Ratings(object):
         soup = get_soup(self.url)
         if soup:
             return soup
-        
+
         # Try building url again with unshortened month
         self._build_url(shorten=False)
         soup = get_soup(self.url)
@@ -304,7 +304,7 @@ class Cable(Ratings):
             if exceeded_limit(self.limit, len(data)):
                 break
 
-            entry = row.find_all('td') 
+            entry = row.find_all('td')
             entry_dict = {}
 
             show = entry[0].string
@@ -463,5 +463,3 @@ class Broadcast(Ratings):
             r_info += string
         rating, share = r_info.split('/')
         return (rating, share.strip('*'))
-
-

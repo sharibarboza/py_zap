@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='py_zap',
-    version='1.2.1',
+    version='1.2.2',
     description='Python scraper for accessing ratings from tvbythenumbers.zap2it.com',
     long_description=readme(),
     author='sharibarboza',
